@@ -140,9 +140,18 @@
                     
 
                     <!-- Comments -->
-                    
+                    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
 
-
+<script> const gitment = new Gitment({
+    owner: 'TjkFred',
+    repo: 'https://github.com/TjkFred/TjkFredsBlog',
+    oauth: {
+      client_id: '1469bc6d5416551ba5d9',
+      client_secret: '7731e0b2dbadeda228b72d5c4ab34902584a1108',
+    },
+})
+gitment.render('comments') </script>
 
                 </div>
                 <div class="fl w-100 w-30-l center fw3 lh-copy pl4-ns tl black-50">

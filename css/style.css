@@ -1,6 +1,6 @@
 body {
   -webkit-backface-visibility: hidden;
-  font-family: "思源黑体", -apple-system, BlinkMacSystemFont, msyh, "Segoe UI", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: "SF Display", "苹方", -apple-system, BlinkMacSystemFont, msyh, "Segoe UI", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 .vh-40 {
   height: 40vh;

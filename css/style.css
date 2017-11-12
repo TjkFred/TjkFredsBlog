@@ -6,10 +6,10 @@ body {
   height: 40vh;
 }
 .bg-1 {
-  background: #d6f473;
-  background: -moz-linear-gradient(left, #d6f473 0%, #a1ed00 100%);
-  background: -webkit-linear-gradient(left, #d6f473 0%, #a1ed00 100%);
-  background: linear-gradient(to right, #d6f473 0%, #a1ed00 100%);
+  background: #8adb00;
+  background: -moz-linear-gradient(left, #8adb00 0%, #a1ed00 100%);
+  background: -webkit-linear-gradient(left, #8adb00 0%, #a1ed00 100%);
+  background: linear-gradient(to right, #8adb00 0%, #a1ed00 100%);
 }
 .pab-100px {
   padding-bottom: 100px;

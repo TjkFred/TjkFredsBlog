@@ -28,7 +28,7 @@ body {
   right: 6rem;
 }
 .text-main-color {
-  color: #a1ed00;
+  color: #e55812;
 }
 .border-color {
   border-color: #fff;
@@ -37,13 +37,13 @@ body {
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 .hover-border-main-color:hover {
-  border-color: #a1ed00;
+  border-color: #e55812;
 }
 .hover-text-main-color {
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 .hover-text-main-color:hover {
-  color: #a1ed00;
+  color: #e55812;
 }
 .cursor-default {
   cursor: default;
@@ -59,7 +59,7 @@ body {
 .content .fake-link {
   text-decoration: none;
   transition: color 0.15s ease-in;
-  color: #a1ed00;
+  color: #e55812;
 }
 .content a:hover,
 .content .fake-link:hover {
@@ -299,7 +299,7 @@ pre .regexp {
 pre .class,
 pre .ruby .class .title,
 pre .css .rules .attribute {
-  color: #a1ed00;
+  color: #8adb00;
 }
 pre .string,
 pre .value,
@@ -307,7 +307,7 @@ pre .inheritance,
 pre .header,
 pre .ruby .symbol,
 pre .xml .cdata {
-  color: #a1ed00;
+  color: #8adb00;
 }
 pre .hexcolor {
   color: #3e999f;

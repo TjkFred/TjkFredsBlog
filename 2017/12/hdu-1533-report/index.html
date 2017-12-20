@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="468ms, 3.8MB
+题目大意
+让图上所有的小人都一一对应地走到房子里，每移动一格要花费 $1，求费用最小是多少
+解析
+如图，这是在图上只有两对 m 和 H 的情况，像这样把节点连起来然后求原点到汇点的 MCMF 就能得出结果了。
+不过我做的时候被建图坑了很久……
+代码1234567891011">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="TjkFred">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="HDU-1533 题解"/>
+    
+
+    <!--Open Graph Description-->
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="TjkFred&#39;s Blog"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article" />
+    
+
+    <!--Page Cover-->
+    
+
+    <meta name="twitter:card" content="summary" />
+    
+
+    <!-- Title -->
+    
+    <title>HDU-1533 题解 - TjkFred&#39;s Blog</title>
+
+    <!-- Tachyons Core CSS -->
+    <link rel="stylesheet" href="//unpkg.com/tachyons/css/tachyons.min.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/TjkFredsBlog/css/style.css">
+
+    <!-- Google Analytics -->
+    
+
+
+</head>
+
+
+<body>
+
+<!-- Main Content -->
+<!-- Banner -->
+<!-- Banner -->
+<div class="w-100 bg-1 ph5-ns ph3 text-light">
+    
+    <nav class="db dt-l w-100 mw8 center border-box pv3">
+        <a class="db dtc-l v-mid link dim w-100 w-25-l tc tl-l mb2 mb0-l white" href="/TjkFredsBlog/" title="TjkFred's Blog">
+            <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDIxLjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IuWbvuWxgl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIKCSB2aWV3Qm94PSIwIDAgMjg3IDM1IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAyODcgMzU7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPHN0eWxlIHR5cGU9InRleHQvY3NzIj4KCS5zdDB7ZmlsbDojRkZGRkZGO30KPC9zdHlsZT4KPHRpdGxlPklDT048L3RpdGxlPgo8ZyBpZD0iRCI+Cgk8cmVjdCBjbGFzcz0ic3QwIiB3aWR0aD0iNyIgaGVpZ2h0PSI3Ii8+Cgk8cmVjdCB4PSI3IiBjbGFzcz0ic3QwIiB3aWR0aD0iNyIgaGVpZ2h0PSI3Ii8+Cgk8cmVjdCB4PSIxNCIgY2xhc3M9InN0MCIgd2lkdGg9IjciIGhlaWdodD0iNyIvPgoJPHJlY3QgeD0iMjEiIGNsYXNzPSJzdDAiIHdpZHRoPSI3IiBoZWlnaHQ9IjciLz4KCTxyZWN0IHg9IjI4IiBjbGFzcz0ic3QwIiB3aWR0aD0iNyIgaGVpZ2h0PSI3Ii8+Cgk8cmVjdCB4PSIxNCIgeT0iNyIgY2xhc3M9InN0MCIgd2lkdGg9IjciIGhlaWdodD0iNyIvPgoJPHJlY3QgeD0iMTQiIHk9IjE0IiBjbGFzcz0ic3QwIiB3aWR0aD0iNyIgaGVpZ2h0PSI3Ii8+Cgk8cmVjdCB4PSIxNCIgeT0iMjEiIGNsYXNzPSJzdDAiIHdpZHRoPSI3IiBoZWlnaHQ9IjciLz4KCTxyZWN0IHg9IjE0IiB5PSIyOCIgY2xhc3M9InN0MCIgd2lkdGg9IjciIGhlaWdodD0iNyIvPgo8L2c+CjxnIGlkPSJFIj4KCTxyZWN0IHg9IjIxMCIgY2xhc3M9InN0MCIgd2lkdGg9IjciIGhlaWdodD0iNyIvPgoJPHJlY3QgeD0iMjE3IiBjbGFzcz0ic3QwIiB3aWR0aD0iNyIgaGVpZ2h0PSI3Ii8+Cgk8cmVjdCB4PSIyMjQiIGNsYXNzPSJzdDAiIHdpZHRoPSI3IiBoZWlnaHQ9IjciLz4KCTxyZWN0IHg9IjIzMSIgY2xhc3M9InN0MCIgd2lkdGg9IjciIGhlaWdodD0iNyIvPgoJPHJlY3QgeD0iMjM4IiBjbGFzcz0ic3QwIiB3aWR0aD0iNyIgaGVpZ2h0PSI3Ii8+Cgk8cmVjdCB4PSIyMTciIHk9IjI4IiBjbGFzcz0ic3QwIiB3aWR0aD0iNyIgaGVpZ2h0PSI3Ii8+Cgk8cmVjdCB4PSIyMjQiIHk9IjI4IiBjbGFzcz0ic3QwIiB3aWR0aD0iNyIgaGVpZ2h0PSI3Ii8+Cgk8cmVjdCB4PSIyMzEiIHk9IjI4IiBjbGFzcz0ic3QwIiB3aWR0aD0iNyIgaGVpZ2h0PSI3Ii8+Cgk8cmVjdCB4PSIyMTciIHk9IjE0IiBjbGFzcz0ic3QwIiB3aWR0aD0iNyIgaGVpZ2h0PSI3Ii8+Cgk8cmVjdCB4PSIyMjQiIHk9IjE0IiBjbGFzcz0ic3QwIiB3aWR0aD0iNyIgaGVpZ2h0PSI3Ii8+Cgk8cmVjdCB4PSIyMzEiIHk9IjE0IiBjbGFzcz0ic3QwIiB3aWR0aD0iNyIgaGVpZ2h0PSI3Ii8+Cgk8cmVjdCB4PSIyMzgiIHk9IjI4IiBjbGFzcz0ic3QwIiB3aWR0aD0iNyIgaGVpZ2h0PSI3Ii8+Cgk8cmVjdCB4PSIyMTAiIHk9IjciIGNsYXNzPSJzdDAiIHdpZHRoPSI3IiBoZWlnaHQ9IjciLz4KCTxyZWN0IHg9IjIxMCIgeT0iMTQiIGNsYXNzPSJzdDAiIHdpZHRoPSI3IiBoZWlnaHQ9IjciLz4KCTxyZWN0IHg9IjIxMCIgeT0iMjEiIGNsYXNzPSJzdDAiIHdpZHRoPSI3IiBoZWlnaHQ9IjciLz4KCTxyZWN0IHg9IjIxMCIgeT0iMjgiIGNsYXNzPSJzdDAiIHdpZHRoPSI3IiBoZWlnaHQ9IjciLz4KPC9nPgo8ZyBpZD0iUiI+Cgk8cmVjdCB4PSIxNjgiIGNsYXNzPSJzdDAiIHdpZHRoPSI3IiBoZWlnaHQ9IjciLz4KCTxyZWN0IHg9IjE3NSIgY2xhc3M9InN0MCIgd2lkdGg9IjciIGhlaWdodD0iNyIvPgoJPHJlY3QgeD0iMTgyIiBjbGFzcz0ic3QwIiB3aWR0aD0iNyIgaGVpZ2h0PSI3Ii8+Cgk8cmVjdCB4PSIxODkiIGNsYXNzPSJzdDAiIHdpZHRoPSI3IiBoZWlnaHQ9IjciLz4KCTxyZWN0IHg9IjE3NSIgeT0iMTQiIGNsYXNzPSJzdDAiIHdpZHRoPSI3IiBoZWlnaHQ9IjciLz4KCTxyZWN0IHg9IjE4MiIgeT0iMTQiIGNsYXNzPSJzdDAiIHdpZHRoPSI3IiBoZWlnaHQ9IjciLz4KCTxyZWN0IHg9IjE4OSIgeT0iMTQiIGNsYXNzPSJzdDAiIHdpZHRoPSI3IiBoZWlnaHQ9IjciLz4KCTxyZWN0IHg9IjE5NiIgeT0iNyIgY2xhc3M9InN0MCIgd2lkdGg9IjciIGhlaWdodD0iNyIvPgoJPHJlY3QgeD0iMTk2IiB5PSIyMSIgY2xhc3M9InN0MCIgd2lkdGg9IjciIGhlaWdodD0iNyIvPgoJPHJlY3QgeD0iMTk2IiB5PSIyOCIgY2xhc3M9InN0MCIgd2lkdGg9IjciIGhlaWdodD0iNyIvPgoJPHJlY3QgeD0iMTY4IiB5PSI3IiBjbGFzcz0ic3QwIiB3aWR0aD0iNyIgaGVpZ2h0PSI3Ii8+Cgk8cmVjdCB4PSIxNjgiIHk9IjE0IiBjbGFzcz0ic3QwIiB3aWR0aD0iNyIgaGVpZ2h0PSI3Ii8+Cgk8cmVjdCB4PSIxNjgiIHk9IjIxIiBjbGFzcz0ic3QwIiB3aWR0aD0iNyIgaGVpZ2h0PSI3Ii8+Cgk8cmVjdCB4PSIxNjgiIHk9IjI4IiBjbGFzcz0ic3QwIiB3aWR0aD0iNyIgaGVpZ2h0PSI3Ii8+CjwvZz4KPGcgaWQ9IkYiPgoJPHJlY3QgeD0iMjUyIiBjbGFzcz0ic3QwIiB3aWR0aD0iNyIgaGVpZ2h0PSI3Ii8+Cgk8cmVjdCB4PSIyNTkiIGNsYXNzPSJzdDAiIHdpZHRoPSI3IiBoZWlnaHQ9IjciLz4KCTxyZWN0IHg9IjI2NiIgY2xhc3M9InN0MCIgd2lkdGg9IjciIGhlaWdodD0iNyIvPgoJPHJlY3QgeD0iMjczIiBjbGFzcz0ic3QwIiB3aWR0aD0iNyIgaGVpZ2h0PSI3Ii8+Cgk8cmVjdCB4PSIyNTkiIHk9IjI4IiBjbGFzcz0ic3QwIiB3aWR0aD0iNyIgaGVpZ2h0PSI3Ii8+Cgk8cmVjdCB4PSIyNjYiIHk9IjI4IiBjbGFzcz0ic3QwIiB3aWR0aD0iNyIgaGVpZ2h0PSI3Ii8+Cgk8cmVjdCB4PSIyNzMiIHk9IjI4IiBjbGFzcz0ic3QwIiB3aWR0aD0iNyIgaGVpZ2h0PSI3Ii8+Cgk8cmVjdCB4PSIyODAiIHk9IjciIGNsYXNzPSJzdDAiIHdpZHRoPSI3IiBoZWlnaHQ9IjciLz4KCTxyZWN0IHg9IjI4MCIgeT0iMjEiIGNsYXNzPSJzdDAiIHdpZHRoPSI3IiBoZWlnaHQ9IjciLz4KCTxyZWN0IHg9IjI4MCIgeT0iMTQiIGNsYXNzPSJzdDAiIHdpZHRoPSI3IiBoZWlnaHQ9IjciLz4KCTxyZWN0IHg9IjI1MiIgeT0iNyIgY2xhc3M9InN0MCIgd2lkdGg9IjciIGhlaWdodD0iNyIvPgoJPHJlY3QgeD0iMjUyIiB5PSIxNCIgY2xhc3M9InN0MCIgd2lkdGg9IjciIGhlaWdodD0iNyIvPgoJPHJlY3QgeD0iMjUyIiB5PSIyMSIgY2xhc3M9InN0MCIgd2lkdGg9IjciIGhlaWdodD0iNyIvPgoJPHJlY3QgeD0iMjUyIiB5PSIyOCIgY2xhc3M9InN0MCIgd2lkdGg9IjciIGhlaWdodD0iNyIvPgo8L2c+CjxnIGlkPSJLIj4KCTxyZWN0IHg9IjQyIiBjbGFzcz0ic3QwIiB3aWR0aD0iNyIgaGVpZ2h0PSI3Ii8+Cgk8cmVjdCB4PSI0OSIgY2xhc3M9InN0MCIgd2lkdGg9IjciIGhlaWdodD0iNyIvPgoJPHJlY3QgeD0iNTYiIGNsYXNzPSJzdDAiIHdpZHRoPSI3IiBoZWlnaHQ9IjciLz4KCTxyZWN0IHg9IjYzIiBjbGFzcz0ic3QwIiB3aWR0aD0iNyIgaGVpZ2h0PSI3Ii8+Cgk8cmVjdCB4PSI3MCIgY2xhc3M9InN0MCIgd2lkdGg9IjciIGhlaWdodD0iNyIvPgoJPHJlY3QgeD0iNDIiIHk9IjI4IiBjbGFzcz0ic3QwIiB3aWR0aD0iNyIgaGVpZ2h0PSI3Ii8+Cgk8cmVjdCB4PSI0OSIgeT0iMjgiIGNsYXNzPSJzdDAiIHdpZHRoPSI3IiBoZWlnaHQ9IjciLz4KCTxyZWN0IHg9IjU2IiB5PSI3IiBjbGFzcz0ic3QwIiB3aWR0aD0iNyIgaGVpZ2h0PSI3Ii8+Cgk8cmVjdCB4PSI1NiIgeT0iMTQiIGNsYXNzPSJzdDAiIHdpZHRoPSI3IiBoZWlnaHQ9IjciLz4KCTxyZWN0IHg9IjU2IiB5PSIyMSIgY2xhc3M9InN0MCIgd2lkdGg9IjciIGhlaWdodD0iNyIvPgo8L2c+CjxnIGlkPSJKIj4KCTxyZWN0IHg9Ijg0IiBjbGFzcz0ic3QwIiB3aWR0aD0iNyIgaGVpZ2h0PSI3Ii8+Cgk8cmVjdCB4PSI5OCIgeT0iMTQiIGNsYXNzPSJzdDAiIHdpZHRoPSI3IiBoZWlnaHQ9IjciLz4KCTxyZWN0IHg9IjEwNSIgeT0iNyIgY2xhc3M9InN0MCIgd2lkdGg9IjciIGhlaWdodD0iNyIvPgoJPHJlY3QgeD0iMTA1IiB5PSIyMSIgY2xhc3M9InN0MCIgd2lkdGg9IjciIGhlaWdodD0iNyIvPgoJPHJlY3QgeD0iMTEyIiB5PSIyOCIgY2xhc3M9InN0MCIgd2lkdGg9IjciIGhlaWdodD0iNyIvPgoJPHJlY3QgeD0iMTEyIiBjbGFzcz0ic3QwIiB3aWR0aD0iNyIgaGVpZ2h0PSI3Ii8+Cgk8cmVjdCB4PSI4NCIgeT0iMjgiIGNsYXNzPSJzdDAiIHdpZHRoPSI3IiBoZWlnaHQ9IjciLz4KCTxyZWN0IHg9IjkxIiB5PSIxNCIgY2xhc3M9InN0MCIgd2lkdGg9IjciIGhlaWdodD0iNyIvPgoJPHJlY3QgeD0iODQiIHk9IjciIGNsYXNzPSJzdDAiIHdpZHRoPSI3IiBoZWlnaHQ9IjciLz4KCTxyZWN0IHg9Ijg0IiB5PSIxNCIgY2xhc3M9InN0MCIgd2lkdGg9IjciIGhlaWdodD0iNyIvPgoJPHJlY3QgeD0iODQiIHk9IjIxIiBjbGFzcz0ic3QwIiB3aWR0aD0iNyIgaGVpZ2h0PSI3Ii8+CjwvZz4KPGcgaWQ9IlQiPgoJPHJlY3QgeD0iMTI2IiBjbGFzcz0ic3QwIiB3aWR0aD0iNyIgaGVpZ2h0PSI3Ii8+Cgk8cmVjdCB4PSIxNDAiIGNsYXNzPSJzdDAiIHdpZHRoPSI3IiBoZWlnaHQ9IjciLz4KCTxyZWN0IHg9IjE0NyIgY2xhc3M9InN0MCIgd2lkdGg9IjciIGhlaWdodD0iNyIvPgoJPHJlY3QgeD0iMTMzIiB5PSIxNCIgY2xhc3M9InN0MCIgd2lkdGg9IjciIGhlaWdodD0iNyIvPgoJPHJlY3QgeD0iMTQwIiB5PSIxNCIgY2xhc3M9InN0MCIgd2lkdGg9IjciIGhlaWdodD0iNyIvPgoJPHJlY3QgeD0iMTQ3IiB5PSIxNCIgY2xhc3M9InN0MCIgd2lkdGg9IjciIGhlaWdodD0iNyIvPgoJPHJlY3QgeD0iMTU0IiBjbGFzcz0ic3QwIiB3aWR0aD0iNyIgaGVpZ2h0PSI3Ii8+Cgk8cmVjdCB4PSIxMjYiIHk9IjI4IiBjbGFzcz0ic3QwIiB3aWR0aD0iNyIgaGVpZ2h0PSI3Ii8+Cgk8cmVjdCB4PSIxMzMiIGNsYXNzPSJzdDAiIHdpZHRoPSI3IiBoZWlnaHQ9IjciLz4KCTxyZWN0IHg9IjEyNiIgeT0iNyIgY2xhc3M9InN0MCIgd2lkdGg9IjciIGhlaWdodD0iNyIvPgoJPHJlY3QgeD0iMTI2IiB5PSIxNCIgY2xhc3M9InN0MCIgd2lkdGg9IjciIGhlaWdodD0iNyIvPgoJPHJlY3QgeD0iMTI2IiB5PSIyMSIgY2xhc3M9InN0MCIgd2lkdGg9IjciIGhlaWdodD0iNyIvPgo8L2c+Cjwvc3ZnPgo=" class="dib h3" alt="TjkFred's Blog">
+        </a>
+        <div class="db dtc-l v-mid w-100 w-75-l tc tr-l">
+            
+                <a class="link dim f6 f5-l dib mr3 mr4-l white" 
+                    href="/TjkFredsBlog/index.html" 
+                    title="Home 首页">
+                    Home 首页
+                </a>
+            
+                <a class="link dim f6 f5-l dib mr3 mr4-l white" 
+                    href="/TjkFredsBlog/archives" 
+                    title="Archives 归档">
+                    Archives 归档
+                </a>
+            
+                <a class="link dim f6 f5-l dib mr3 mr4-l white" 
+                    href="/TjkFredsBlog/about" 
+                    title="About 关于 [EN]">
+                    About 关于 [EN]
+                </a>
+            
+        </div>
+    </nav>
+
+    <!-- Title -->
+    <div class="w-100 mw8 center vh-40 dt">
+        <div class="dtc v-mid white">
+            <h1 class="f1-l f2-m tc tc-m tl-ns">HDU-1533 题解</h1>
+            <p class="f4 fw3 pab-100px tc tc-m tl-ns">2017/12/20</p>
+        </div>
+    </div>
+
+    <!-- Icon -->
+    <div class="relative w-100 mw8 center white dn dn-m db-ns">
+        <i class="header-icon fa fa-file-text-o"></i>
+    </div>
+</div>
+
+<!-- Content -->
+<div class="w-100 ph2 ph4-m ph5-l mv5 mv6-l">
+    <div class="content">
+        <div class="mw8 center">
+            <div class="cf">
+                <div class="fl w-100 w-70-l mw7 left fw3 lh-copy pr4-ns pr0-m post-content">
+                    <!-- Tags Vertical -->
+                    
+
+                    <!-- Main Post Content -->
+                    <p><em>468ms, 3.8MB</em></p>
+<h2 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意"></a>题目大意</h2><p><img src="https://odzkskevi.qnssl.com/0d77b0d8574d5186f189f53f1ecd55a5?v=1513682114" alt="图片"></p>
+<p>让图上所有的小人都一一对应地走到房子里，每移动一格要花费 $1，求费用最小是多少</p>
+<h2 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h2><p><img src="https://wx3.sinaimg.cn/large/e2d8c2f2gy1fmnnmi7cb9j20m80gojrs.jpg" alt="pic"></p>
+<p>如图，这是在图上只有两对 m 和 H 的情况，像这样把节点连起来然后求原点到汇点的 <a href="https://tjkfred.github.io/TjkFredsBlog/2017/12/mcmf-template/">MCMF</a> 就能得出结果了。</p>
+<p>不过我做的时候被建图坑了很久……</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">// TJKFRED</span></div><div class="line"><span class="comment">// CC4.0 BY-NC-SA</span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;climits&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> llng;</div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">23333</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">pt</span> &#123;</span></div><div class="line">    <span class="keyword">int</span> x;</div><div class="line">    <span class="keyword">int</span> y;</div><div class="line">    <span class="keyword">int</span> index;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">mht_dist</span><span class="params">(pt to)</span> </span>&#123;	<span class="comment">// GET MANHATTAN DISTANCE</span></div><div class="line">        <span class="keyword">return</span> <span class="built_in">abs</span>(x - to.x) + <span class="built_in">abs</span>(y - to.y);</div><div class="line">    &#125;</div><div class="line">    pt(<span class="keyword">int</span> x, <span class="keyword">int</span> y): x(x), y(y) &#123;&#125;;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">EDGE</span> &#123;</span></div><div class="line">    <span class="keyword">int</span> fr, to, cap, flow, cost;</div><div class="line">    EDGE(<span class="keyword">int</span> u, <span class="keyword">int</span> v, <span class="keyword">int</span> ca, <span class="keyword">int</span> f, <span class="keyword">int</span> co): fr(u), to(v), cap(ca), flow(f), cost(co) &#123;&#125;;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">netflow_mcmf</span> &#123;</span></div><div class="line">    <span class="keyword">private</span>:</div><div class="line">        <span class="keyword">int</span> node_tot;</div><div class="line">        <span class="built_in">vector</span>&lt;EDGE&gt; edge;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; graph[maxn];</div><div class="line">        <span class="keyword">int</span> improv[maxn];</div><div class="line">        <span class="keyword">int</span> dist[maxn];</div><div class="line">        <span class="keyword">int</span> prev[maxn];</div><div class="line">        <span class="keyword">int</span> inque[maxn];</div><div class="line"></div><div class="line">    <span class="keyword">public</span>:</div><div class="line">        netflow_mcmf(<span class="keyword">int</span> size): node_tot(size) &#123;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; size; i++)</div><div class="line">                graph[i].clear();</div><div class="line">            edge.clear();</div><div class="line">        &#125;</div><div class="line">        <span class="function"><span class="keyword">void</span> <span class="title">add_edge</span><span class="params">(<span class="keyword">int</span> fr, <span class="keyword">int</span> to, <span class="keyword">int</span> cap, <span class="keyword">int</span> cost)</span> </span>&#123;</div><div class="line">            edge.push_back(EDGE(fr, to, cap, <span class="number">0</span>, cost));</div><div class="line">            edge.push_back(EDGE(to, fr, <span class="number">0</span>, <span class="number">0</span>, -cost));</div><div class="line">            <span class="keyword">int</span> m = edge.size();</div><div class="line">            graph[fr].push_back(m - <span class="number">2</span>);</div><div class="line">            graph[to].push_back(m - <span class="number">1</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="function"><span class="keyword">bool</span> <span class="title">SPFA</span><span class="params">(<span class="keyword">int</span> start, <span class="keyword">int</span> term, <span class="keyword">int</span> &amp;flow, <span class="keyword">int</span> &amp;cost)</span> </span>&#123;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; node_tot; i++)</div><div class="line">                dist[i] = maxn;</div><div class="line">            <span class="built_in">memset</span>(inque, <span class="number">0</span>, <span class="keyword">sizeof</span>(inque));</div><div class="line">            dist[start] = <span class="number">0</span>;</div><div class="line">            inque[start] = <span class="literal">true</span>;</div><div class="line">            prev[start] = <span class="number">0</span>;</div><div class="line">            improv[start] = maxn;</div><div class="line"></div><div class="line">            <span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; que;</div><div class="line">            que.push(start);</div><div class="line"></div><div class="line">            <span class="keyword">while</span>(!que.empty()) &#123;</div><div class="line">                <span class="keyword">int</span> frnt = que.front();</div><div class="line">                que.pop();</div><div class="line">                inque[frnt]--;</div><div class="line"></div><div class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; graph[frnt].size(); i++) &#123;</div><div class="line">                    EDGE&amp; ed = edge[graph[frnt][i]];</div><div class="line">                    <span class="keyword">if</span>(ed.cap &gt; ed.flow &amp;&amp; dist[ed.to] &gt; dist[frnt] + ed.cost) &#123;	<span class="comment">// TRIANGLE INEQUALITY</span></div><div class="line">                        dist[ed.to] = dist[frnt] + ed.cost;</div><div class="line">                        prev[ed.to] = graph[frnt][i];</div><div class="line">                        improv[ed.to] = min(improv[frnt], ed.cap - ed.flow);</div><div class="line">                        <span class="keyword">if</span>(!inque[ed.to]) &#123;</div><div class="line">                            inque[ed.to]++;</div><div class="line">                            que.push(ed.to);</div><div class="line">                        &#125;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span>(dist[term] == maxn)</div><div class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line"></div><div class="line">            flow += improv[term];</div><div class="line">            cost += dist[term] * improv[term];</div><div class="line">            <span class="keyword">int</span> u = term;</div><div class="line">            <span class="keyword">while</span>(u != start) &#123;	<span class="comment">// UPDATE BOTH REGULAR&amp;REVERSED EDGES</span></div><div class="line">                edge[prev[u]].flow += improv[term];</div><div class="line">                edge[prev[u] ^ <span class="number">1</span>].flow -= improv[term];</div><div class="line">                u = edge[prev[u]].fr;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="function"><span class="keyword">int</span> <span class="title">min_cost_max_flow</span><span class="params">(<span class="keyword">int</span> start, <span class="keyword">int</span> term)</span> </span>&#123;</div><div class="line">            <span class="keyword">int</span> flow = <span class="number">0</span>, cost = <span class="number">0</span>;</div><div class="line">            <span class="keyword">while</span>(SPFA(start, term, flow, cost));</div><div class="line">            <span class="keyword">return</span> cost;</div><div class="line">        &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> size_lines, size_columns;</div><div class="line">    <span class="built_in">cin</span> &gt;&gt; size_lines &gt;&gt; size_columns;</div><div class="line">    <span class="keyword">while</span>(size_lines || size_columns) &#123;</div><div class="line">        <span class="built_in">vector</span>&lt;pt&gt; h;	<span class="comment">// 蛤</span></div><div class="line">        <span class="built_in">vector</span>&lt;pt&gt; m;	<span class="comment">// 蟆</span></div><div class="line"></div><div class="line">        <span class="comment">// 听说这样能让评测时间变短（雾）</span></div><div class="line"></div><div class="line">        <span class="keyword">int</span> man_num = <span class="number">0</span>;</div><div class="line">        <span class="keyword">char</span> temp;</div><div class="line">        <span class="built_in">cin</span>.get();</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= size_lines; i++) &#123;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= size_columns; j++) &#123;</div><div class="line">                <span class="function">pt <span class="title">tmppt</span><span class="params">(i, j)</span></span>;</div><div class="line">                temp = <span class="built_in">cin</span>.get();</div><div class="line">                <span class="keyword">if</span>(temp == <span class="string">'H'</span>) &#123;</div><div class="line">                    h.push_back(tmppt);</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">if</span>(temp == <span class="string">'m'</span>) &#123;</div><div class="line">                    m.push_back(tmppt);</div><div class="line">                    man_num++;</div><div class="line">                &#125;</div><div class="line">            &#125;;</div><div class="line">            <span class="built_in">cin</span>.get();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">int</span> nodes = man_num * <span class="number">2</span>;</div><div class="line">        <span class="function">netflow_mcmf <span class="title">mcmf</span><span class="params">(nodes + <span class="number">2</span>)</span></span>;</div><div class="line"></div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; man_num; i++) &#123;</div><div class="line">            mcmf.add_edge(nodes, i, <span class="number">1</span>, <span class="number">0</span>);</div><div class="line">            mcmf.add_edge(i + man_num, nodes + <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; man_num; i++)</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = man_num; j &lt; nodes; j++) &#123;</div><div class="line"><span class="comment">//                cerr &lt;&lt; "cost" &lt;&lt; m[i].mht_dist(h[j - man_num]) &lt;&lt; endl;</span></div><div class="line">                mcmf.add_edge(i, j, <span class="number">1</span>, m[i].mht_dist(h[j - man_num]));</div><div class="line">            &#125;</div><div class="line"></div><div class="line">        <span class="built_in">cout</span> &lt;&lt; mcmf.min_cost_max_flow(nodes, nodes + <span class="number">1</span>) &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">        <span class="built_in">cin</span> &gt;&gt; size_lines &gt;&gt; size_columns;	<span class="comment">// NEW DATA SET</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+                    
+                    <!-- Tags Bottom -->
+                    
+
+                    <!-- Comments -->
+                    <div id="container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  owner: 'TjkFred',
+  repo: 'TjkFredsBlog',
+  oauth: {
+    client_id: '1469bc6d5416551ba5d9 ',
+    client_secret: '7731e0b2dbadeda228b72d5c4ab34902584a1108',
+  },
+})
+gitment.render('container') </script>
+
+                </div>
+                <div class="fl w-100 w-30-l center fw3 lh-copy pl4-ns tl black-50">
+                    
+                    <hr class="dn-l mw4 black-50 mt5" />
+                    
+                    <!-- Widget 1: About -->
+                    <div class="mt5 mt0-l">
+    <article class="dt db-l mw8 mw8-m mw5-ns center ml0-l bg-white mv3">
+        <div class="dn dtc-m db-l v-mid tc pr4 pr0-l" style="min-width: 6rem;">
+            <img src="/" class="mb4-l br-100 h3 w3 h4-l w4-l dib" title="TjkFred">
+        </div>
+        <div class="dtc db-l v-mid lh-copy measure center f6 black-50 tj">
+            一个初二的OIer
+        </div>
+    </article>
+</div>
+
+                    <hr class="dn-l mw4 black-50 mt5" />
+                    
+                    <!-- Widget 2: Categories -->
+                    
+
+                    <!-- Widget 3: Recent Posts -->
+                    <div class="mt5 tc tl-l">
+    <h3>Recent Posts 最近的文章</h3>
+    
+        <p>
+            <a href="/TjkFredsBlog/2017/12/hdu-1533-report/">HDU-1533 题解</a>
+        </p>
+    
+        <p>
+            <a href="/TjkFredsBlog/2017/12/mcmf-template/">MCMF 模板</a>
+        </p>
+    
+        <p>
+            <a href="/TjkFredsBlog/2017/11/ideas-about-making-my-own-game/">Ideas About Making My Own Game</a>
+        </p>
+    
+        <p>
+            <a href="/TjkFredsBlog/2017/11/期中考炸了/">期中考炸了</a>
+        </p>
+    
+        <p>
+            <a href="/TjkFredsBlog/2017/07/hello-world/">Hello World</a>
+        </p>
+    
+</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Footer -->
+<div class="bg-1 ph2 ph5-ns pv5">
+        <div class="mv8">
+            <div class="center tc">
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="https://twitter.com/TjkFred" target="_blank">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </div>
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="https://www.facebook.com/profile.php?id=100012590853769" target="_blank">
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </div>
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="https://plus.google.com/u/0/113612921853617219773" target="_blank">
+                            <i class="fa fa-google-plus"></i>
+                        </a>
+                    </div>
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="mailto:tjk@live.cn" target="_blank">
+                            <i class="fa fa-envelope"></i>
+                        </a>
+                    </div>
+                
+                    <div class="dib mh3">
+                        <a class="f3 f2-ns white dim" href="/TjkFredsBlog/#" target="_blank">
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </div>
+                
+            </div>
+            <div class="f6 f5-ns center tc white pt5 fw3">
+                @TjkFred | Powered by <a class="link dim white" href="https://hexo.io">Hexo</a> | <a class="link dim white" href="https://github.com/klugjo/hexo-theme-anodyne">Theme</a> designed by <a class="link dim white" href="http://www.codeblocq.com/">Jonathan Klughertz</a>
+            </div>
+        </div>
+    </div>
+
+<!-- After Footer -->
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>
